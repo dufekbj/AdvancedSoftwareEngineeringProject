@@ -1,0 +1,23 @@
+# Core Python utilities
+numpy
+matplotlib
+
+# Mutation testing tool
+mutpy==0.6.1  # or whichever version is stable for your environment
+
+# For running subprocess + test harnesses nicely (optional)
+pytest
+pytest-timeout
+
+# For data serialization, experiment tracking
+pandas
+
+# (Optional) If you want pretty plots or notebooks
+jupyter
+seaborn
+
+# (Optional) CLI quality of life
+tqdm
+
+# (Optional) Static type checking
+mypy

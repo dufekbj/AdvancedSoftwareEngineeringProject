@@ -1,0 +1,58 @@
+EvoBug progress and next steps
+
+What we did to get here
+- Defined a common problem wrapper (name, INPUT_SPEC, target_function, random_input, BASE_TESTS) for the five selected
+LeetCode-style problems (two_sum, reverse_string, rotated_sort, roman_to_int, supersequence) so results are comparable
+in the paper.
+- Built the GA loop/operators with spec-aware crossover/mutation and captured per-run/per-generation fitness histories
+for reporting.
+- Integrated MutPy (patched for Python 3.14) as the primary mutation scorer, with a lightweight fallback and an
+`EVOBUG_MUTPY=0` switch to control runtime during experiments.
+- Implemented an experiments runner that sweeps all problems with configurable population/generation sizes, emits JSON
+summaries, and supports plotting GA vs random and per-run fitness—these outputs feed directly into the paper’s
+figures/tables.
+- Added deterministic BASE_TESTS per problem to strengthen coverage and make mutation scores in the paper reproducible.
+- Created a smoke test to validate the GA pipeline wiring; ran fast-mode experiments and saved summaries/plots under
+`experiments/results/` to serve as interim data points.
+
+What’s still left (per the proposal)
+- Run “real” experiments with MutPy enabled (unset EVOBUG_MUTPY)
+  - Increase EXPERIMENT_POPULATION_SIZE/EXPERIMENT_NUM_GENERATIONS if time allows
+  - Run `python main.py` to regenerate summaries in experiments/results/
+  - Recreate GA vs random plot (and per-problem fitness plots) and save under experiments/results/plots/
+- Tune GA parameters based on the real runs
+  - Inspect mutation scores per problem; adjust population/generations/mutation rate/crossover rate
+  - Re-run targeted problems after tuning and update summaries/plots
+- Expand plots and keep artifacts
+  - Generate per-problem fitness-over-generations plots (using the stored histories) and save alongside summaries
+  - Ensure GA vs random bar chart reflects the latest “real” runs
+- Write the final 3-page report comparing GA vs random
+  - Include methodology, GA settings, mutation tool details, and runtime caveats
+  - Present results with plots/tables; discuss per-problem wins/losses and limitations
+- Optional hardening
+  - Add CI/lint/type checks and keep pytest smoke coverage
+  - Add more BASE_TESTS for stubborn mutants if scores are low
+
+Function flow (high level)
+- Entry point: `main.py`
+  - Parses `--mode` (`single-ga`, `single-random`, `all-experiments`) and `--problem` when required.
+  - Dispatches to GA (`ga.engine.run_ga_for_problem`), random baseline (`baselines.random_testing.run_random_baseline`), or
+    experiment runner (`experiments.run_experiments.run_all_experiments`).
+- GA path (`ga.engine.run_ga_for_problem`)
+  - Imports problem module (must expose INPUT_SPEC, target_function, random_input, decode_individual, BASE_TESTS).
+  - Initializes population via `ga.representation.population_init`.
+  - Evaluates fitness via `ga.evaluation.evaluate_population`, which calls `mutation.mutpy_runner.run_mutation_tests`.
+  - Evolves over generations with `ga.operators.tournament_selection`, `crossover`, and `mutate` (spec-aware), tracking best
+    and average fitness histories.
+  - Returns best individual/fitness and histories.
+- Random baseline (`baselines.random_testing.run_random_baseline`)
+  - Generates random inputs with the problem’s `random_input`, then calls `run_mutation_tests`.
+- Mutation scoring (`mutation.mutpy_runner.run_mutation_tests`)
+  - Builds a temp unittest module combining incoming inputs + BASE_TESTS.
+  - Runs MutPy (patched for Python 3.14) to score mutants; on failure/timeout or `EVOBUG_MUTPY=0`, uses the lightweight
+    fallback mutator.
+  - Returns mutation_score/killed/total.
+- Experiments (`experiments.run_experiments.run_all_experiments`)
+  - Iterates configured problems, runs GA multiple times and the random baseline once, aggregates stats and histories.
+  - Writes JSON summaries to `experiments/results/`.
+  - Plots can be generated from summaries via `viz.plots` (GA vs random bars, per-run/generation fitness).

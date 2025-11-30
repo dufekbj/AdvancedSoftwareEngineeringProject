@@ -1,0 +1,48 @@
+Project Proposal
+Team Members:
+•	Brandon Reiheld
+•	Alex Quedens
+•	Bradley Dufek
+Project Title:
+EvoBug – A Genetic Algorithm for Killing Mutants in LeetCode Programs
+Introduction
+This proposal outlines a project aimed at developing EvoBug, a genetic algorithm (GA) designed to enhance the
+effectiveness of mutation testing in software development. By leveraging evolutionary techniques, we aim to optimize
+test inputs to improve code coverage and detect software vulnerabilities more efficiently than traditional methods.
+Motivation
+Mutation testing serves as a critical measure of test suite quality. Current approaches often rely heavily on random
+input generation, which may not effectively exploit the potential of existing test cases. EvoBug seeks to address this
+gap by utilizing an evolutionary strategy to make the testing process both dynamic and visually impactful.
+Problem Statement
+The primary problem our team aims to solve is the inefficiency of existing mutation testing methodologies that often
+fall short in maximizing mutation scores. These methodologies typically do not leverage advanced techniques, leading to
+lower detection rates of mutant programs.
+Proposed Work
+Our approach involves the development of a genetic algorithm that evolves test inputs specifically designed to maximize
+the percentage of mutants killed. The insights gained from this will be further elucidated through:
+1.	Selecting 3–5 short Python/Java functions from LeetCode.
+2.	Utilizing a mutation testing tool (e.g., MutPy or PIT) to inject mutants.
+3.	Implementing a GA in Python that generates input vectors optimized for killing these mutants.
+4.	Evaluating our GA's effectiveness by comparing it against random input generation techniques.
+Techniques
+•       Genetic Algorithm (GA) will be the backbone of our project. We will implement genetic operators such as
+selection, crossover, and mutation to evolve the test inputs.
+•	Mutation Testing Tools will be used to create a robust set of mutational variants for evaluation.
+Evaluation Plan
+The effectiveness of EvoBug will be assessed by:
+•	Comparing the mutation scores achieved through the GA against those from random testing.
+•	Documenting and visualizing improvements in mutant kills over multiple generations.
+Feasibility
+Given the timeline, we will structure our milestones as follows:
+•       Week 1-2 (Nov 3 - 17): Literature review of genetic algorithms and mutation testing techniques. Initial setup
+and testing of selected functions.
+•	Week 3 (Nov 18 - Dec 1): Implementation of the GA and mutation testing tool. Initial tests on selected functions.
+•	Dec 2: Run extensive evaluations and begin compiling results.
+•	Dec 3: Prepare presentation materials based on findings.
+Deliverables
+At the conclusion of the project, we aim to deliver:
+•       A comprehensive GitHub repository containing the code, mutant reports, and visualizations illustrating fitness
+improvement per generation.
+•       A 3-page report addressing the research question: “Can genetic algorithms outperform random testing at mutation
+killing?”
+

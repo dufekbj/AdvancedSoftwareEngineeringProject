@@ -1,7 +1,37 @@
-def search(nums: list[int], target: int) -> int:
+"""Rotated sorted array search wrapper for the GA pipeline."""
+
+from typing import List, Tuple
+import random
+
+name = "rotated_sorted_array_search"
+
+INPUT_SPEC = {
+    "args": [
+        {
+            "name": "nums",
+            "type": "list_int",
+            "length_range": (1, 20),
+            "value_range": (-100, 100),
+        },
+        {
+            "name": "target",
+            "type": "int",
+            "value_range": (-150, 150),
+        },
+    ]
+}
+
+BASE_TESTS = [
+    ([4, 5, 6, 7, 0, 1, 2], 0),
+    ([4, 5, 6, 7, 0, 1, 2], 3),
+    ([1], 0),
+    ([1, 3], 3),
+]
+
+
+def target_function(nums: List[int], target: int) -> int:
     """
     Return index of target in rotated sorted array nums, or -1 if not found.
-    Time: O(log n), Space: O(1).
     """
     if not nums:
         return -1
@@ -25,3 +55,24 @@ def search(nums: list[int], target: int) -> int:
                 right = mid - 1
 
     return -1
+
+
+def random_input() -> Tuple[List[int], int]:
+    length = random.randint(*INPUT_SPEC["args"][0]["length_range"])
+    lo, hi = INPUT_SPEC["args"][0]["value_range"]
+    base = sorted(random.randint(lo, hi) for _ in range(length))
+
+    # Rotate by a random pivot
+    if length > 1:
+        pivot = random.randint(0, length - 1)
+        nums = base[pivot:] + base[:pivot]
+    else:
+        nums = base
+
+    lo_t, hi_t = INPUT_SPEC["args"][1]["value_range"]
+    target = random.randint(lo_t, hi_t)
+    return nums, target
+
+
+def decode_individual(individual_genome):
+    return individual_genome
