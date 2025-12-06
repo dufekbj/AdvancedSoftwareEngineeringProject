@@ -26,6 +26,13 @@ BASE_TESTS = [
     ("geek", "eke"),
     ("abc", "ac"),
     ("", "abc"),
+    ("abcd", "xycd"),
+    ("aggtab", "gxtxayb"),
+    ("ace", "abcde"),
+    ("aaa", "aa"),
+    ("xyz", "pqr"),
+    ("abc", "abc"),
+    ("abc", ""),
 ]
 
 

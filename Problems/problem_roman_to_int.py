@@ -21,6 +21,11 @@ BASE_TESTS = [
     ("MCMXCIV",),
     ("IV",),
     ("CDXLIV",),
+    ("MMMCMXCIX",),  # 3999 max standard value
+    ("XLII",),       # 42
+    ("XCIX",),       # 99
+    ("IX",),
+    ("MDCLXVI",),
 ]
 
 

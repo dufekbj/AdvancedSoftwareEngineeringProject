@@ -13,7 +13,9 @@ summaries, and supports plotting GA vs random and per-run fitness—these output
 figures/tables.
 - Added deterministic BASE_TESTS per problem to strengthen coverage and make mutation scores in the paper reproducible.
 - Created a smoke test to validate the GA pipeline wiring; ran fast-mode experiments and saved summaries/plots under
-`experiments/results/` to serve as interim data points.
+  `experiments/results/` to serve as interim data points.
+- Wrapped the duplicate-digits problem (`problems.problem_dup_digits`) with the same interface and base tests so it can be
+  included in experiments.
 
 What’s still left (per the proposal)
 - Run “real” experiments with MutPy enabled (unset EVOBUG_MUTPY)

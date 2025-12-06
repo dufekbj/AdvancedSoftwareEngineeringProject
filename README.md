@@ -26,6 +26,7 @@ experiments compare GA performance against random testing across the included pr
 - `problems.problem_rotated_sort` (rotated array search)
 - `problems.problem_roman_to_int` (Roman numeral parsing)
 - `problems.problem_supersequence` (shortest common supersequence)
+- `problems.problem_dup_digits` (count numbers with duplicate digits)
 
 ## Experiments
 - Defaults are tuned for quick runs (see `config.EXPERIMENT_*`); bump them up when you want final numbers.

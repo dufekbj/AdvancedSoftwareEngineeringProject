@@ -21,6 +21,10 @@ BASE_TESTS = [
     ("racecar",),
     ("a",),
     ("",),
+    ("AbC123!@",),
+    ("longerstringforreverse",),
+    ("  spaced",),
+    ("mixOfCASEand123",),
 ]
 
 

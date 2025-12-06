@@ -27,6 +27,7 @@ PROBLEMS = [
     "problems.problem_rotated_sort",
     "problems.problem_roman_to_int",
     "problems.problem_supersequence",
+    "problems.problem_dup_digits",
 ]
 
 
