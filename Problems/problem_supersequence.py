@@ -33,6 +33,11 @@ BASE_TESTS = [
     ("xyz", "pqr"),
     ("abc", "abc"),
     ("abc", ""),
+    ("aaaa", "aaa"),
+    ("abc", "def"),
+    ("axbxc", "abc"),
+    ("banana", "ban"),      # high overlap
+    ("kitten", "sitting"),  # classic edit-distance style
 ]
 
 

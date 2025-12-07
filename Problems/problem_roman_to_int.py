@@ -26,6 +26,11 @@ BASE_TESTS = [
     ("XCIX",),       # 99
     ("IX",),
     ("MDCLXVI",),
+    ("XL",),
+    ("CM",),
+    ("IIII",),  # lenient form to catch subtraction logic changes
+    ("XC",),
+    ("XLIX",),
 ]
 
 

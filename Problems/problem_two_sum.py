@@ -34,6 +34,12 @@ BASE_TESTS = [
     ([2, 5, 5, 11], 10),
     ([1, 3, 4, 2], 6),
     ([-3, 4, 3, 90], 0),
+    ([1, 2, 3], 100),           # no solution
+    ([1, 2, 3, 4, 5], 6),       # multiple pairs exist
+    ([0, -1, 2, -3, 4], 1),     # mixed signs
+    ([3, 3, 4, 2], 6),          # duplicate valid pairs
+    ([5, 6, 1, 0], 7),          # zero plus positive
+    ([1, 1, 1, 1], 2),          # all duplicates
 ]
 
 

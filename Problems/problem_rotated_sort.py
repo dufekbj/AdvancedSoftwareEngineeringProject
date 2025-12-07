@@ -32,6 +32,10 @@ BASE_TESTS = [
     ([0, 5, -20, -15, -10, -5], -15),
     ([10, 10, 10, 1, 10], 1),
     ([5, 1, 3], 2),
+    ([4, 5, 6, 7, 0, 1, 2], 8),  # target absent
+    ([9, 10, 2, 5, 6], 6),       # target in second segment
+    ([1, 1, 3, 1], 3),           # duplicates with rotation
+    ([6, 7, 0, 1, 2, 4, 5], 6),  # target at start
 ]
 
 

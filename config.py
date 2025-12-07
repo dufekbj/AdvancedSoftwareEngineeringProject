@@ -6,21 +6,21 @@ experimental settings without scattering magic numbers everywhere.
 """
 
 # GA parameters (adjust as needed)
-POPULATION_SIZE = 40
+POPULATION_SIZE = 60
 NUM_GENERATIONS = 20
 CROSSOVER_RATE = 0.8
 MUTATION_RATE = 0.25
 TOURNAMENT_SIZE = 4
 
 # Experiment overrides (smaller defaults for quicker runs; tweak as needed)
-EXPERIMENT_POPULATION_SIZE = 30
-EXPERIMENT_NUM_GENERATIONS = 10
+EXPERIMENT_POPULATION_SIZE = 40
+EXPERIMENT_NUM_GENERATIONS = 20
 
 # Mutation testing configuration
 MAX_RIP_HOPS = 9  # Ignore; leftover example in case you need general constants
 
 MUTATION_TOOL = "mutpy"       # or 'custom', if you roll your own mutator
-MUTATION_TIMEOUT_SECONDS = 10 # Time limit per mutant batch run
+MUTATION_TIMEOUT_SECONDS = 15 # Time limit per mutant batch run
 
 # Experiment settings
 RANDOM_BASELINE_NUM_TESTS = 200  # Number of random tests to generate for baseline

@@ -25,6 +25,9 @@ BASE_TESTS = [
     ("longerstringforreverse",),
     ("  spaced",),
     ("mixOfCASEand123",),
+    ("   ",),            # whitespace only
+    ("abc def",),        # space inside
+    ("palindromeemordnilap",),
 ]
 
 
