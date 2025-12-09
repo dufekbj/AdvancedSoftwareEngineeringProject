@@ -7,7 +7,7 @@ matplotlib
 mutpy==0.6.1  # or whichever version is stable for your environment
 PyYAML>=6.0.0
 
-# For running subprocess + test harnesses nicely (optional)
+# Tests use stdlib unittest by default; pytest is optional
 pytest
 pytest-timeout
 
