@@ -1,9 +1,4 @@
-"""
-Global configuration for EvoBug.
-
-Centralizing config makes it easy to tweak GA parameters, paths, and
-experimental settings without scattering magic numbers everywhere.
-"""
+"""Project-wide configuration for EvoBug."""
 
 # GA parameters (adjust as needed)
 POPULATION_SIZE = 60
@@ -42,5 +37,5 @@ BASELINE_INCLUDE_BASE_TESTS = True  # Random baseline still keeps BASE_TESTS for
 # Problem-specific budget overrides (helps tame long-running problems)
 # Keys are problem module paths; values can set population_size and/or num_generations.
 PROBLEM_BUDGET_OVERRIDES = {
-    "problems.problem_rotated_sort": {"population_size": 6, "num_generations": 3},
+    "problems.problem_rotated_sort": {"population_size": 6, "num_generations": 3},  # keeps long MutPy runs manageable
 }

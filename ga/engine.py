@@ -1,14 +1,4 @@
-"""
-Main GA loop.
-
-This module ties together:
-- population initialization
-- fitness evaluation
-- selection, crossover, mutation
-- tracking best fitness per generation
-
-It should be generic over problems.
-"""
+"""GA loop: initialize, evaluate, evolve population, and track best fitness."""
 
 from typing import Dict, Any, List, Tuple
 import importlib
@@ -31,23 +21,7 @@ def run_ga_for_problem(
     num_generations: int | None = None,
     seed: int | None = None,
 ) -> Dict[str, Any]:
-    """
-    Run the GA for a single problem.
-
-    Parameters
-    ----------
-    problem_module_name : str
-        Import path to problem, e.g. 'problems.problem_two_sum'
-
-    Returns
-    -------
-    results : dict
-        Fields might include:
-        - 'best_individual'
-        - 'best_fitness'
-        - 'fitness_history' (list of best per generation)
-        - 'avg_fitness_history'
-    """
+    """Run the GA for a problem module and return best individual, fitness, and histories."""
     # Seed RNGs: prefer per-run seed, else config seed (may be None).
     effective_seed = seed if seed is not None else GLOBAL_RANDOM_SEED
     if effective_seed is not None:
@@ -59,7 +33,7 @@ def run_ga_for_problem(
             pass
 
     # Allow experiments or problem-specific overrides to adjust budgets; fall back to config values.
-    override = PROBLEM_BUDGET_OVERRIDES.get(problem_module_name, {})
+    override = PROBLEM_BUDGET_OVERRIDES.get(problem_module_name, {})  # lets heavy problems run with smaller budgets
     population_size = population_size or override.get("population_size") or POPULATION_SIZE
     num_generations = num_generations or override.get("num_generations") or NUM_GENERATIONS
 

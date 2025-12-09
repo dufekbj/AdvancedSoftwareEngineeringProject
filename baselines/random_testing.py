@@ -1,14 +1,4 @@
-"""
-Random testing baseline.
-
-Goal:
-- Compare GA performance to purely random input generation.
-- For a fixed budget of test inputs (e.g., 500), generate random inputs
-  and compute resulting mutation score.
-
-Design choice:
-- Evaluate mutation score of the whole random suite at once.
-"""
+"""Random baseline: score a suite of random inputs at once."""
 
 from typing import Any, Dict
 import importlib
@@ -24,24 +14,7 @@ from config import RANDOM_BASELINE_NUM_TESTS, BASELINE_INCLUDE_BASE_TESTS
 
 
 def run_random_baseline(problem_module_name: str, seed: int | None = None) -> Dict[str, Any]:
-    """
-    Run random testing for a single problem.
-
-    Steps:
-    - Import problem module.
-    - Use problem_module.random_input() to generate N test inputs.
-    - Call run_mutation_tests() with the whole test suite.
-    - Return mutation score and other stats.
-
-    Returns
-    -------
-    result : dict
-        At least:
-        - 'mutation_score'
-        - 'killed'
-        - 'total'
-        - 'num_tests'
-    """
+    """Generate RANDOM_BASELINE_NUM_TESTS inputs, score them, and return mutation stats."""
     if seed is not None:
         random.seed(seed)
         if np is not None:

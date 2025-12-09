@@ -1,13 +1,4 @@
-"""
-Top-level CLI driver.
-
-You can use this to quickly:
-- Run GA on a single problem
-- Run experiments across all problems
-- Print a quick summary to stdout
-
-This helps the project feel "complete" and demo-able.
-"""
+"""CLI entry point for running GA, random baseline, or full experiments."""
 
 import argparse
 
