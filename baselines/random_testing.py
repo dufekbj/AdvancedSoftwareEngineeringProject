@@ -12,12 +12,18 @@ Design choice:
 
 from typing import Any, Dict
 import importlib
+import random
+
+try:
+    import numpy as np
+except Exception:  # pragma: no cover - numpy optional
+    np = None
 
 from mutation.mutpy_runner import run_mutation_tests
 from config import RANDOM_BASELINE_NUM_TESTS
 
 
-def run_random_baseline(problem_module_name: str) -> Dict[str, Any]:
+def run_random_baseline(problem_module_name: str, seed: int | None = None) -> Dict[str, Any]:
     """
     Run random testing for a single problem.
 
@@ -36,6 +42,13 @@ def run_random_baseline(problem_module_name: str) -> Dict[str, Any]:
         - 'total'
         - 'num_tests'
     """
+    if seed is not None:
+        random.seed(seed)
+        if np is not None:
+            try:
+                np.random.seed(seed)
+            except Exception:
+                pass
     problem_module = importlib.import_module(problem_module_name)
 
     test_inputs = [problem_module.random_input()

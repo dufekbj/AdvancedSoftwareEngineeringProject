@@ -54,6 +54,29 @@ the GA can still run end-to-end.
 Set `EVOBUG_MUTPY=0` to always use the lightweight mutator (useful for quick
 experiments or headless environments).
 
+### MutPy runner quirk (macOS)
+- MutPy 0.6.1 targets Python 3.10; use a 3.10 venv for mutation testing.
+- On macOS, the default process-based runner can drop injected mutants. In the venv, patch `mutpy/utils.py` to use the thread runner and fix a legacy API call:
+  - Change `get_mutation_test_runner_class` to return `MutationTestRunnerThread`.
+  - In `MutationTestRunnerThread.terminate`, replace `isAlive()` with `is_alive()`.
+- Then run, e.g.:
+  ```
+  PYTHONPATH=$(pwd) .venv310/bin/mut.py \
+    --target problems.problem_two_sum \
+    --unit-test tests.test_two_sum \
+    --path . \
+    --report /tmp/two_sum_mutpy.yml
+  ```
+With those patches, the injected mutants are exercised and the tests kill them as expected.
+
+### Running experiments and collecting results
+- Full experiment runs now create a timestamped folder under `experiments/results/` (e.g., `20250101_120000`) and record seeds in `seeds_used.txt`.
+- A base seed is chosen per run; each GA/random baseline invocation gets its own seed, so runs can vary while still being reproducible via the recorded seeds.
+- Plotting utilities (`viz/plots.py`) can now aggregate across runs:
+  - `collect_problem_summaries` walks all result folders.
+  - `plot_problem_scores_over_runs` shows GA vs random means across runs for a problem.
+  - `plot_problem_histories` overlays per-generation fitness histories across runs.
+
 ## Results/outputs
 - Experiment summaries are written to `experiments/results/`
 - Mutation cache placeholder lives at `mutation/mutants_cache/`

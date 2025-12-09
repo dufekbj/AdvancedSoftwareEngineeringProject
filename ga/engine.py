@@ -24,6 +24,7 @@ def run_ga_for_problem(
     problem_module_name: str,
     population_size: int | None = None,
     num_generations: int | None = None,
+    seed: int | None = None,
 ) -> Dict[str, Any]:
     """
     Run the GA for a single problem.
@@ -42,7 +43,15 @@ def run_ga_for_problem(
         - 'fitness_history' (list of best per generation)
         - 'avg_fitness_history'
     """
-    random.seed(GLOBAL_RANDOM_SEED)
+    # Seed RNGs: prefer per-run seed, else config seed (may be None).
+    effective_seed = seed if seed is not None else GLOBAL_RANDOM_SEED
+    if effective_seed is not None:
+        random.seed(effective_seed)
+        try:
+            import numpy as np
+            np.random.seed(effective_seed)
+        except Exception:
+            pass
 
     # Allow experiments to override defaults; fall back to config values.
     population_size = population_size or POPULATION_SIZE
