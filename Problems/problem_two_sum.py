@@ -40,6 +40,14 @@ BASE_TESTS = [
     ([3, 3, 4, 2], 6),          # duplicate valid pairs
     ([5, 6, 1, 0], 7),          # zero plus positive
     ([1, 1, 1, 1], 2),          # all duplicates
+    ([1, 2, 3], 2),             # cannot reuse same index
+    ([1, -1], 0),               # sign flip pair
+    ([1, 5, 5, 3, 7], 8),       # multiple valid pairs
+    ([5, 5, 5, 5, 3, 2], 7),    # many duplicates
+    ([0, 0, 1, 2], 1),          # zeros with a single non-zero
+    ([-2, -1, -1, -3], -4),     # negatives with duplicates
+    ([10, -10, 20, -20], 0),    # large magnitude mixed signs
+    ([2, 4, 6], 5),             # odd target not achievable
 ]
 
 

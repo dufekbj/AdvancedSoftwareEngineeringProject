@@ -37,9 +37,9 @@ def target_function(s: str) -> str:
 
 
 def random_input() -> Tuple[str]:
-    """Generate a random ASCII lowercase string within the specified length."""
+    """Generate a random ASCII string (letters/digits/punct/space) within the specified length."""
     length = random.randint(*INPUT_SPEC["args"][0]["length_range"])
-    chars = string.ascii_lowercase
+    chars = string.ascii_letters + string.digits + string.punctuation + " "
     generated = "".join(random.choice(chars) for _ in range(length))
     return (generated,)
 

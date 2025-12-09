@@ -20,6 +20,12 @@ Timeline
   - Base seed chosen per run; GA runs and random baselines each use their own seeds to allow variation while preserving reproducibility.
   - Plot utilities (`viz/plots.py`) extended to aggregate across runs (collect summaries, plot scores over runs, overlay fitness histories).
 
+Latest observations (2025-12-09)
+- Fitness curves are flat and equal to the random baseline (reverse_string ~0.33, two_sum ~0.54, rotated_sort ~0.45): no run improves beyond generation 0. The BASE_TESTS are always included in scoring, so a single GA-generated input rarely changes the kill rate when BASE_TESTS already kill most mutants; deduping also drops any GA input identical to an existing base case.
+- Each individual encodes only one test input, further limiting incremental kills; mutation for strings stays in lowercase, narrowing the search space vs the punctuation/uppercase/whitespace mutants that survive.
+- Low budgets (pop 20, gens 10) and a high fallback on MutPy producing small mutant sets leave little gradient. To raise the ceiling: temporarily score without BASE_TESTS or down-weight them, let individuals represent small suites, broaden mutation alphabets (uppercase/punct/whitespace), and increase population/generations if time permits.
+
+
 What’s still left
 - Run “real” experiments with MutPy enabled (unset `EVOBUG_MUTPY`), larger population/generations if time allows.
 - Regenerate summaries in `experiments/results/` and plots in `experiments/results/plots/` (GA vs random, per-problem fitness).

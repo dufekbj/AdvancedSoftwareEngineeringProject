@@ -129,13 +129,14 @@ def _mutate_str(value: str, arg_spec: dict) -> str:
 
     len_lo, len_hi = arg_spec.get("length_range", (1, max(1, len(value))))
     value_list = list(value)
+    alphabet = string.ascii_letters + string.digits + string.punctuation + " "
 
     action = random.random()
     if action < 0.34 and value_list:
         idx = random.randrange(len(value_list))
-        value_list[idx] = random.choice(string.ascii_lowercase)
+        value_list[idx] = random.choice(alphabet)
     elif action < 0.67 and len(value_list) < len_hi:
-        value_list.insert(random.randrange(len(value_list) + 1), random.choice(string.ascii_lowercase))
+        value_list.insert(random.randrange(len(value_list) + 1), random.choice(alphabet))
     elif len(value_list) > len_lo:
         value_list.pop(random.randrange(len(value_list)))
     return "".join(value_list)

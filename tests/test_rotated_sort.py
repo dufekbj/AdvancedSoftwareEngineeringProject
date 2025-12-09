@@ -39,6 +39,7 @@ class TestProblemRotatedSort(unittest.TestCase):
         arr = [4, 5, 6, 7, 0, 1, 2]
         self.assertEqual(rotated_search(arr, 3), -1)
         self.assertEqual(rotated_search([5, 1, 3], 2), -1)
+        self.assertEqual(rotated_search([1, 1, 1], 2), -1)
 
     def test_arrays_with_duplicates(self):
         arr1 = [10, 10, 10, 1, 10]
@@ -48,12 +49,33 @@ class TestProblemRotatedSort(unittest.TestCase):
         self.assertEqual(rotated_search(arr2, 3), 3)
         arr3 = [1, 1, 3, 1]
         self.assertEqual(rotated_search(arr3, 3), 2)
+        arr4 = [2, 2, 2, 2, 2]
+        idx = rotated_search(arr4, 2)
+        self.assertNotEqual(idx, -1)
+        self.assertTrue(0 <= idx < len(arr4))
 
     def test_negative_numbers_array(self):
         arr = [0, 5, -20, -15, -10, -5]
         self.assertEqual(rotated_search(arr, -15), 3)
         self.assertEqual(rotated_search(arr, 5), 1)
         self.assertEqual(rotated_search(arr, 99), -1)
+
+    def test_pivot_edges(self):
+        arr = [1, 2, 3, 4, 5]
+        self.assertEqual(rotated_search(arr, 1), 0)
+        rotated = [5, 1, 2, 3, 4]
+        self.assertEqual(rotated_search(rotated, 5), 0)
+        self.assertEqual(rotated_search(rotated, 4), 4)
+
+    def test_min_length_pivot_and_absent(self):
+        arr = [2, 1]
+        self.assertEqual(rotated_search(arr, 2), 0)
+        self.assertEqual(rotated_search(arr, 4), -1)
+
+    def test_large_rotation_and_absent(self):
+        arr = [15, 16, 17, 1, 2, 3, 4, 5]
+        self.assertEqual(rotated_search(arr, 17), 2)
+        self.assertEqual(rotated_search(arr, 8), -1)
 
 
 if __name__ == "__main__":

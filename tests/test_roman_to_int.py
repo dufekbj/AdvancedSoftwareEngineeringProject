@@ -36,6 +36,12 @@ class TestProblemRomanToInt(unittest.TestCase):
         self.assertEqual(roman_to_int("MCMXCIV"), 1994)
         self.assertEqual(roman_to_int("CDXLIV"), 444)
         self.assertEqual(roman_to_int("MMMCMXCIX"), 3999)
+        self.assertEqual(roman_to_int("CMXCIX"), 999)
+        self.assertEqual(roman_to_int("MCDLXXVI"), 1476)
+        self.assertEqual(roman_to_int("XCIX"), 99)
+        self.assertEqual(roman_to_int("XLIX"), 49)
+        self.assertEqual(roman_to_int("MMMDCCCLXXXVIII"), 3888)
+        self.assertEqual(roman_to_int("MCMXLIV"), 1944)
 
     def test_repeated_numerals_lenient(self):
         self.assertEqual(roman_to_int("IIII"), 4)
@@ -49,6 +55,9 @@ class TestProblemRomanToInt(unittest.TestCase):
             roman_to_int("ICZ")
         with self.assertRaises(KeyError):
             roman_to_int("iv")
+        with self.assertRaises(KeyError):
+            roman_to_int("Vi")
+        self.assertEqual(roman_to_int(""), 0)  # current behavior on empty
 
 
 if __name__ == "__main__":

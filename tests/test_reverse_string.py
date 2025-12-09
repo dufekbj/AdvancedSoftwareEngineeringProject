@@ -26,6 +26,10 @@ class TestProblemReverseString(unittest.TestCase):
     def test_mixed_case_and_numbers(self):
         self.assertEqual(p.target_function("mixOfCASEand123"), "321dnaESACfOxim")
 
+    def test_with_escape_characters(self):
+        s = "line1\nline2\tend"
+        self.assertEqual(p.target_function(s), "dne\t2enil\n1enil")
+
 
 if __name__ == "__main__":
     unittest.main()

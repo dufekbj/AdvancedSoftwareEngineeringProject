@@ -18,6 +18,7 @@ from typing import Any, List
 import importlib
 
 from mutation.mutpy_runner import run_mutation_tests
+from config import GA_INCLUDE_BASE_TESTS, INDIVIDUAL_SUITE_SIZE
 
 
 def evaluate_individual(
@@ -49,11 +50,19 @@ def evaluate_individual(
     fitness : float
         Mutation score.
     """
+    problem_module = importlib.import_module(problem_module_name)
     decoded_input = decode_fn(individual)
-    # test_inputs is a list of input objects
-    test_inputs = [decoded_input]
 
-    result = run_mutation_tests(problem_module_name, test_inputs)
+    # Optional hook: problem module can provide suite_from_individual to build a small suite from a genome.
+    if hasattr(problem_module, "suite_from_individual"):
+        test_inputs = problem_module.suite_from_individual(decoded_input)
+    else:
+        suite_size = max(1, INDIVIDUAL_SUITE_SIZE)
+        test_inputs = [decoded_input]
+        while len(test_inputs) < suite_size:
+            test_inputs.append(problem_module.random_input())
+
+    result = run_mutation_tests(problem_module_name, test_inputs, use_base_tests=GA_INCLUDE_BASE_TESTS)
     return result["mutation_score"]
 
 

@@ -73,7 +73,8 @@ def target_function(str1: str, str2: str) -> str:
 def random_input() -> Tuple[str, str]:
     def rand_str(length_range):
         length = random.randint(*length_range)
-        return "".join(random.choice(string.ascii_lowercase) for _ in range(length))
+        alphabet = string.ascii_letters + string.digits + string.punctuation + " "
+        return "".join(random.choice(alphabet) for _ in range(length))
 
     s1 = rand_str(INPUT_SPEC["args"][0]["length_range"])
     s2 = rand_str(INPUT_SPEC["args"][1]["length_range"])

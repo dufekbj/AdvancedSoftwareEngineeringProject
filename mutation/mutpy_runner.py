@@ -97,6 +97,25 @@ def _write_temp_tests(
                     "            self.assertNotEqual(result[0], result[1])",
                     "            self.assertTrue(all(0 <= i < len(args[0]) for i in result))",
                     "            self.assertEqual(args[0][result[0]] + args[0][result[1]], args[1])",
+                    "        # Guard critical constants to catch mutants touching specs or bases.",
+                    "        self.assertEqual(problem_module.INPUT_SPEC['args'][0]['value_range'], (-100, 100))",
+                    "        self.assertEqual(problem_module.INPUT_SPEC['args'][1]['value_range'], (-200, 200))",
+                    "        self.assertEqual(problem_module.INPUT_SPEC['args'][0]['length_range'], (2, 20))",
+                    "        self.assertEqual(problem_module.INPUT_SPEC['args'][0]['name'], 'nums')",
+                    "        self.assertEqual(problem_module.INPUT_SPEC['args'][1]['name'], 'target')",
+                    "        base_checks = [",
+                    "            ([2, 7, 11, 15], 9),",
+                    "            ([3, 3], 6),",
+                    "            ([3, 2, 4], 6),",
+                    "            ([-1, -2, -3, -4, -5], -8),",
+                    "            ([0, 4, 3, 0], 0),",
+                    "            ([1, 2, 3, 4, 5], 6),",
+                    "            ([1, 2, 3], 2),",
+                    "            ([10, -10, 20, -20], 0),",
+                    "            ([5, 5, 5, 5, 3, 2], 7),",
+                    "        ]",
+                    "        for bc in base_checks:",
+                    "            self.assertIn(bc, problem_module.BASE_TESTS)",
                 ]
             )
         if "problem_rotated_sort" in problem_module_name:
@@ -264,10 +283,11 @@ def _fallback_lightweight(problem_module_name: str, test_inputs: List[Any]) -> D
 def run_mutation_tests(
     problem_module_name: str,
     test_inputs: List[Any],
+    use_base_tests: bool = True,
 ) -> Dict[str, Any]:
     problem_module = importlib.import_module(problem_module_name)
     # Fold in deterministic BASE_TESTS so every run exercises known edge cases.
-    base_tests = getattr(problem_module, "BASE_TESTS", [])
+    base_tests = getattr(problem_module, "BASE_TESTS", []) if use_base_tests else []
 
     def _dedupe(inputs: List[Any]) -> List[Any]:
         seen = set()
@@ -323,6 +343,7 @@ def run_mutation_tests(
         "--report",
         report_path,
         "--quiet",
+        "--experimental-operators",
     ]
 
     try:

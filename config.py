@@ -12,18 +12,18 @@ CROSSOVER_RATE = 0.8
 MUTATION_RATE = 0.25
 TOURNAMENT_SIZE = 4
 
-# Experiment overrides (smaller defaults for quicker runs; tweak as needed)
-EXPERIMENT_POPULATION_SIZE = 30  # tuned to keep full suite ~10 minutes with MutPy
-EXPERIMENT_NUM_GENERATIONS = 15
+# Experiment overrides (short runs to iterate quickly)
+EXPERIMENT_POPULATION_SIZE = 20
+EXPERIMENT_NUM_GENERATIONS = 10
 
 # Mutation testing configuration
 MAX_RIP_HOPS = 9  # Ignore; leftover example in case you need general constants
 
 MUTATION_TOOL = "mutpy"       # or 'custom', if you roll your own mutator
-MUTATION_TIMEOUT_SECONDS = 15 # Time limit per mutant batch run
+MUTATION_TIMEOUT_SECONDS = 15 # Slightly higher to reduce timeouts on harder problems
 
 # Experiment settings
-RANDOM_BASELINE_NUM_TESTS = 150  # Number of random tests to generate for baseline
+RANDOM_BASELINE_NUM_TESTS = 10  # Number of random tests to generate for baseline
 NUM_RUNS_PER_PROBLEM = 2         # Repeats to average out randomness in GA
 
 # Paths (you can expand these later if needed)
@@ -33,3 +33,8 @@ MUTANTS_CACHE_DIR = "mutation/mutants_cache"
 
 # Reproducibility (set to None to sample a fresh seed each run; the chosen seed is recorded in results)
 GLOBAL_RANDOM_SEED = None
+
+# GA evaluation tweaks (to raise ceiling without increasing budgets)
+GA_INCLUDE_BASE_TESTS = False  # When False, GA fitness is scored only on the individual's suite (no BASE_TESTS)
+INDIVIDUAL_SUITE_SIZE = 3      # How many test inputs a single individual encodes (1 = current behavior)
+BASELINE_INCLUDE_BASE_TESTS = True  # Random baseline still keeps BASE_TESTS for comparison

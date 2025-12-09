@@ -47,6 +47,13 @@ class TestProblemSupersequence(unittest.TestCase):
         expected_len = len("kitten") + len("sitting") - 4
         self.assertEqual(len(result), expected_len)
 
+    def test_repeated_characters_overlap(self):
+        result = scs("aaaa", "aaab")
+        self.assertEqual(result, "aaaab")
+        self.assertTrue(self._is_subsequence(result, "aaaa"))
+        self.assertTrue(self._is_subsequence(result, "aaab"))
+        self.assertEqual(len(result), len("aaaa") + len("aaab") - 3)
+
 
 if __name__ == "__main__":
     unittest.main()
