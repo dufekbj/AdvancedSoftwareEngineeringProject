@@ -38,3 +38,9 @@ GLOBAL_RANDOM_SEED = None
 GA_INCLUDE_BASE_TESTS = False  # When False, GA fitness is scored only on the individual's suite (no BASE_TESTS)
 INDIVIDUAL_SUITE_SIZE = 3      # How many test inputs a single individual encodes (1 = current behavior)
 BASELINE_INCLUDE_BASE_TESTS = True  # Random baseline still keeps BASE_TESTS for comparison
+
+# Problem-specific budget overrides (helps tame long-running problems)
+# Keys are problem module paths; values can set population_size and/or num_generations.
+PROBLEM_BUDGET_OVERRIDES = {
+    "problems.problem_rotated_sort": {"population_size": 6, "num_generations": 3},
+}

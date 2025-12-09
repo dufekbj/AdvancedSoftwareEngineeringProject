@@ -1,0 +1,19 @@
+base_seed=818574
+{"problem": "problems.problem_two_sum", "run_index": 0, "seed": 270589}
+{"problem": "problems.problem_two_sum", "run_index": 1, "seed": 500803}
+{"problem": "problems.problem_two_sum", "random_seed": 907783}
+{"problem": "problems.problem_reverse_string", "run_index": 0, "seed": 900}
+{"problem": "problems.problem_reverse_string", "run_index": 1, "seed": 714350}
+{"problem": "problems.problem_reverse_string", "random_seed": 773815}
+{"problem": "problems.problem_rotated_sort", "run_index": 0, "seed": 61659}
+{"problem": "problems.problem_rotated_sort", "run_index": 1, "seed": 609071}
+{"problem": "problems.problem_rotated_sort", "random_seed": 213035}
+{"problem": "problems.problem_roman_to_int", "run_index": 0, "seed": 462111}
+{"problem": "problems.problem_roman_to_int", "run_index": 1, "seed": 189829}
+{"problem": "problems.problem_roman_to_int", "random_seed": 449847}
+{"problem": "problems.problem_supersequence", "run_index": 0, "seed": 853907}
+{"problem": "problems.problem_supersequence", "run_index": 1, "seed": 956470}
+{"problem": "problems.problem_supersequence", "random_seed": 164684}
+{"problem": "problems.problem_dup_digits", "run_index": 0, "seed": 495205}
+{"problem": "problems.problem_dup_digits", "run_index": 1, "seed": 710910}
+{"problem": "problems.problem_dup_digits", "random_seed": 543368}

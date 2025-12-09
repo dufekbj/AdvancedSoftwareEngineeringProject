@@ -14,7 +14,12 @@ from typing import Dict, Any, List, Tuple
 import importlib
 import random
 
-from config import POPULATION_SIZE, NUM_GENERATIONS, GLOBAL_RANDOM_SEED
+from config import (
+    POPULATION_SIZE,
+    NUM_GENERATIONS,
+    GLOBAL_RANDOM_SEED,
+    PROBLEM_BUDGET_OVERRIDES,
+)
 from .representation import population_init
 from .operators import tournament_selection, crossover, mutate
 from .evaluation import evaluate_population
@@ -53,9 +58,10 @@ def run_ga_for_problem(
         except Exception:
             pass
 
-    # Allow experiments to override defaults; fall back to config values.
-    population_size = population_size or POPULATION_SIZE
-    num_generations = num_generations or NUM_GENERATIONS
+    # Allow experiments or problem-specific overrides to adjust budgets; fall back to config values.
+    override = PROBLEM_BUDGET_OVERRIDES.get(problem_module_name, {})
+    population_size = population_size or override.get("population_size") or POPULATION_SIZE
+    num_generations = num_generations or override.get("num_generations") or NUM_GENERATIONS
 
     problem_module = importlib.import_module(problem_module_name)
     decode_fn = getattr(problem_module, "decode_individual")

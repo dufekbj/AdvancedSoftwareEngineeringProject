@@ -1,0 +1,82 @@
+{
+  "problem": "problems.problem_roman_to_int",
+  "ga_best_scores": [
+    0.375,
+    0.375
+  ],
+  "ga_best_score_mean": 0.375,
+  "ga_runs": [
+    {
+      "best_fitness": 0.375,
+      "fitness_history": [
+        0.375,
+        0.375,
+        0.375,
+        0.375,
+        0.375,
+        0.375,
+        0.375,
+        0.375,
+        0.375,
+        0.375
+      ],
+      "avg_fitness_history": [
+        0.37,
+        0.36500000000000005,
+        0.36125000000000007,
+        0.37,
+        0.35750000000000004,
+        0.36375,
+        0.36500000000000005,
+        0.36,
+        0.36250000000000004,
+        0.36875
+      ]
+    },
+    {
+      "best_fitness": 0.375,
+      "fitness_history": [
+        0.375,
+        0.375,
+        0.375,
+        0.375,
+        0.375,
+        0.375,
+        0.375,
+        0.375,
+        0.375,
+        0.375
+      ],
+      "avg_fitness_history": [
+        0.37,
+        0.36875,
+        0.35875,
+        0.36,
+        0.3725,
+        0.37,
+        0.365,
+        0.3725,
+        0.36375,
+        0.36750000000000005
+      ]
+    }
+  ],
+  "random_scores": [
+    0.375
+  ],
+  "random_score_mean": 0.375,
+  "random_details": {
+    "mutation_score": 0.375,
+    "killed": 15,
+    "total": 40,
+    "fallback": false,
+    "num_tests": 10
+  },
+  "config": {
+    "population_size": 20,
+    "num_generations": 10,
+    "num_runs": 2,
+    "results_run_id": "20251209_174050",
+    "base_seed": 818574
+  }
+}

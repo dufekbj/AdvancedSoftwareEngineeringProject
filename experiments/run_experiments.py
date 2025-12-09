@@ -20,6 +20,7 @@ from config import (
     NUM_RUNS_PER_PROBLEM,
     EXPERIMENT_NUM_GENERATIONS,
     EXPERIMENT_POPULATION_SIZE,
+    PROBLEM_BUDGET_OVERRIDES,
 )
 from ga.engine import run_ga_for_problem
 from baselines.random_testing import run_random_baseline
@@ -69,10 +70,13 @@ def run_all_experiments():
                 np.random.seed(run_seed)
             except Exception:
                 pass
+            override = PROBLEM_BUDGET_OVERRIDES.get(problem, {})
+            pop = override.get("population_size", EXPERIMENT_POPULATION_SIZE)
+            gens = override.get("num_generations", EXPERIMENT_NUM_GENERATIONS)
             ga_result = run_ga_for_problem(
                 problem,
-                population_size=EXPERIMENT_POPULATION_SIZE,
-                num_generations=EXPERIMENT_NUM_GENERATIONS,
+                population_size=pop,
+                num_generations=gens,
                 seed=run_seed,
             )
             ga_scores.append(ga_result["best_fitness"])
